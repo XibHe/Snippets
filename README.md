@@ -21,7 +21,7 @@ float tempAllPrices = [[_tempTotalPriceArray valueForKeyPath:@"@sum.floatValue"]
         }
     }
 ```
-#### ceil
+### ceil
 绘制角标提示视图时，在角标右侧偶尔会出现一条黑线。且有时在iPhone5s及以下机型不会出现, 只在iPhone6以上出现。这是因为计算出得size可能的值会10.3113325…… 这样的数, 而像素值显示的时候不可能出现显示半个像素的情况, 那么不足一个像素的值就会被忽略掉, 在分辨率较低的机型上不会出现, 而分辨率较高的则不会忽略, 就出现了黑线，于是采用ceil函数向上取整。
 
 ```
