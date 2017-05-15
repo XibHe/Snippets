@@ -63,3 +63,43 @@ NSInteger _lineCount =  [self labelLineCount:addressWidth];
     return lineCount;
 }
 ```
+### 使用boundingRectWithSize计算内容高度
+iOS7以前我们对UILabel进行根据内容自适应大小的时候会使用方法sizeWithFont:constrainedToSize:lineBreakMode，但是这个方法在iOS7之后就被Deprecated了。对此，iOS7提供了一个新的方法来替代它，就是NSString的成员方法：
+
+```
+- (CGRect)boundingRectWithSize:(CGSize)size options:(NSStringDrawingOptions)options attributes:(NSDictionary *)attributes context:(NSStringDrawingContext *)context；
+```
+
+```
+CGSize infoSize = CGSizeMake(tableView.frame.size.width, 1000);
+CGSize boundingRectWithSize = [_leftPrice.text boundingRectWithSize: infoSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:@{NSFontAttributeName:kFont(11)} context:nil].size;
+CLog(@"boundingRectWithSize = %@",NSStringFromCGSize(boundingRectWithSize));
+```
+1. 参数1: 自适应尺寸,提供一个宽度,去自适应高度
+2. 参数2:自适应设置 (以行为矩形区域自适应,以字体字形自适应)
+3. 参数3:文字属性,通常这里面需要知道是字体大小
+4. 参数4:绘制文本上下文,做底层排版时使用,填nil即可
+
+### 使用CAGradientLayer实现颜色渐变
+
+```
+// 促销标签
+UILabel *salesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth * 26 / 375 / 2)];
+salesLabel.text = [SalesTagsObject salesTagsText:leftModel.tags];
+salesLabel.font = kFont(10);
+salesLabel.textColor = [UIColor whiteColor];
+salesLabel.textAlignment = NSTextAlignmentCenter;
+[_leftImage addSubview:salesLabel];
+// 促销标签渐变色
+CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+gradientLayer.colors = @[(__bridge id)[UIColor colorWithHexString:@"#fd4e4e"].CGColor, (__bridge id)[UIColor colorWithHexString:@"#fe3a5a"].CGColor, (__bridge id)[UIColor colorWithHexString:@"#ff3153"].CGColor, (__bridge id)[UIColor colorWithHexString:@"#f6213a"].CGColor];
+gradientLayer.locations = @[@0.0, @0.45, @0.8, @1.0];
+gradientLayer.startPoint = CGPointMake(0, 0);
+gradientLayer.endPoint = CGPointMake(1.0, 0);
+gradientLayer.frame = CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth * 26 / 375 / 2);
+[salesLabel.layer addSublayer:gradientLayer];
+```
+1. colors 渐变的颜色
+2. locations 渐变颜色的分割点
+3. startPoint&endPoint 颜色渐变的方向，范围在(0,0)与(1.0,1.0)之间，如(0,0)(1.0,0)代表水平方向渐变,(0,0)(0,1.0)代表竖直方向渐变
+
