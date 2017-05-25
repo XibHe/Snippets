@@ -110,11 +110,12 @@ gradientLayer.frame = CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth *
 NSString *JsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";    
 NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
 NSLog(@"%@",HTMLSource);
-
 ```
 
 获取页面的代码body的内容：
 
 ```
-NSString *JsToGetHTMLSource = @"document.body.innerHTML"; NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource]; NSLog(@"pagesource:%@", pageSource);
+NSString *JsToGetHTMLSource = @"document.body.innerHTML"; 
+NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
+NSLog(@"pagesource:%@", pageSource);
 ```
