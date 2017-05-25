@@ -103,3 +103,18 @@ gradientLayer.frame = CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth *
 2. locations 渐变颜色的分割点
 3. startPoint&endPoint 颜色渐变的方向，范围在(0,0)与(1.0,1.0)之间，如(0,0)(1.0,0)代表水平方向渐变,(0,0)(0,1.0)代表竖直方向渐变
 
+### iOS通过js获取webview源代码
+获取所有源代码：
+
+```
+NSString *JsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";    
+NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
+NSLog(@"%@",HTMLSource);
+
+```
+
+获取页面的代码body的内容：
+
+```
+NSString *JsToGetHTMLSource = @"document.body.innerHTML"; NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource]; NSLog(@"pagesource:%@", pageSource);
+```
