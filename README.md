@@ -109,7 +109,7 @@ gradientLayer.frame = CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth *
 ```
 NSString *JsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";    
 NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
-NSLog(@"%@",HTMLSource);
+NSLog(@"%@",HTMLSource);继承UITableViewController,更改tableview样式
 ```
 
 获取页面的代码body的内容：
@@ -118,4 +118,12 @@ NSLog(@"%@",HTMLSource);
 NSString *JsToGetHTMLSource = @"document.body.innerHTML"; 
 NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
 NSLog(@"pagesource:%@", pageSource);
+```
+
+### 继承UITableViewController,更改tableview样式
+
+```
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    return [super initWithStyle:UITableViewStylePlain];
+}
 ```
