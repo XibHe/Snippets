@@ -158,3 +158,10 @@ NSLog(@"pagesource:%@", pageSource);
 ```
 UIViewController *topmostVC = [self topViewController];
 ```
+
+### 修改系统相册返回按钮颜色
+
+```
+ UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+ [picker.navigationBar setTintColor:[UIColor orangeColor]];
+```
