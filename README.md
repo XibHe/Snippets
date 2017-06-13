@@ -165,3 +165,19 @@ UIViewController *topmostVC = [self topViewController];
  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
  [picker.navigationBar setTintColor:[UIColor orangeColor]];
 ```
+
+### iOS中isKindOfClass和isMemberOfClass的区别
+
+相同点:
+> 都是NSObject的比较Class的方法。
+
+不同点:
+>isKindOfClass:确定一个对象是否是一个类的成员，或者是派生自该类的成员。（确定一个对象是否是该类的实例，或者是该类子类的实例。）
+
+>isMemberOfClass:确定一个对象是否是当前类的成员，<font color = #FA8072> 不可以用来确定 </font>一个对象是否是派生自该类的类的成员。
+
+例如，如果想检测 myObject是不是UIImageView，用如下代码：
+
+```
+[myObject isKindOfClass:[UIImageView class]];
+```
