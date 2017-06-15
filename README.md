@@ -181,3 +181,13 @@ UIViewController *topmostVC = [self topViewController];
 ```
 [myObject isKindOfClass:[UIImageView class]];
 ```
+
+### 解决当前页面系统默认侧滑返回手势与页面上其他手势冲突
+
+在viewDidLoad方法中添加该行代码:
+
+```
+[self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+```
+这行代码告诉collectionView手势识别需要等到导航栏侧滑返回手势失败，才能继续，强制侧滑手势优先级高于collectionView上的其他手势。
+
