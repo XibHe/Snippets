@@ -193,3 +193,14 @@ UIViewController *topmostVC = [self topViewController];
 
 #### 参考文档
 [Use interactivepopgesturerecognizer with CollectionView with horizontal scroll when navigation bar is hidden](https://stackoverflow.com/questions/28076473/use-interactivepopgesturerecognizer-with-collectionview-with-horizontal-scroll-w)
+
+### 真机调试时设置动画的执行速度
+
+运行项目并开启debugger,在调用动画的方法上添加断点，然后在控制台中输入如下命令:
+
+```
+po [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] layer] setSpeed:.1f]
+```
+#### 参考文档
+[Toggle slow animation while debugging with iOS Device
+](https://stackoverflow.com/questions/10229375/toggle-slow-animation-while-debugging-with-ios-device)
