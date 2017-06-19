@@ -191,3 +191,5 @@ UIViewController *topmostVC = [self topViewController];
 ```
 这行代码告诉collectionView手势识别需要等到导航栏侧滑返回手势失败，才能继续，强制侧滑手势优先级高于collectionView上的其他手势。
 
+#### 参考文档
+[Use interactivepopgesturerecognizer with CollectionView with horizontal scroll when navigation bar is hidden](https://stackoverflow.com/questions/28076473/use-interactivepopgesturerecognizer-with-collectionview-with-horizontal-scroll-w)
