@@ -204,3 +204,14 @@ po [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] la
 #### 参考文档
 [Toggle slow animation while debugging with iOS Device
 ](https://stackoverflow.com/questions/10229375/toggle-slow-animation-while-debugging-with-ios-device)
+
+### 设置UITableView分割线
+
+```
+// 分割线颜色
+[_listTableView setSeparatorColor:[UIColor colorWithHexString:historySeparatorColor]];
+// 分割线位置
+[_listTableView setSeparatorInset:UIEdgeInsetsMake(0, screenWidth * 194 / 375 / 2, 0, 0)];
+// 分割线样式
+self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+```
