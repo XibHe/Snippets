@@ -215,3 +215,27 @@ po [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] la
 // 分割线样式
 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 ```
+
+### 解决placeholder不居中的问题
+创建一个继承于UITextField的新类，这里命名为CustomTextField,重写UITextField的一些函数来达到我们想要的效果。目前只有通过这种方式才能很准确的调整placeholder的位置。
+
+需要重写的两个函数:
+
+```
+@implementation CustomTextField
+// 返回placeholderLabel的bounds，改变返回值，是调整placeholderLabel的位置
+- (CGRect)placeholderRectForBounds:(CGRect)bounds {
+    return CGRectMake(0,0,self.bounds.size.width, self.bounds.size.height);
+}
+// 这个函数是调整placeholder在placeholderLabel中绘制的位置以及范围
+- (void)drawPlaceholderInRect:(CGRect)rect {
+    [super drawPlaceholderInRect:CGRectMake(0,0, self.bounds.size.width, self.bounds.size.height)];
+}
+@end
+```
+
+> 注意：被重写函数中的CGRectMake()的值是需要根据你自己的需求进行调整的，并不是固定值。其实不难发现通过这种方式我们可以调整placeholder到任意位置，不单单是居中效果。
+
+#### 参考文档
+[iOS 深挖placeholder设置](http://www.jianshu.com/p/b6b78f39b5e4)
+
