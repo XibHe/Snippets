@@ -239,3 +239,20 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 #### 参考文档
 [iOS 深挖placeholder设置](http://www.jianshu.com/p/b6b78f39b5e4)
 
+### UITextField的UIControlEventEditingChanged事件执行两次的问题
+
+```
+[searchText addTarget:self action:@selector(textContentChanged:) forControlEvents:UIControlEventEditingChanged];
+
+-(void)textContentChanged:(UITextField*)textFiled
+{
+NSLog( @"text changed111: %@", textFiled.text);
+UITextRange *selectedRange = [textFiled markedTextRange];
+if(selectedRange == nil || selectedRange.empty){
+NSLog( @"text changed222: %@", textFiled.text);
+ }
+}
+```
+执行结果，text changed111会输出两次，text changed222只输出一次。selectedRange是获取你输出的部分。
+
+
