@@ -255,4 +255,12 @@ NSLog( @"text changed222: %@", textFiled.text);
 ```
 执行结果，text changed111会输出两次，text changed222只输出一次。selectedRange是获取你输出的部分。
 
+### NSMutableArray-Add array at start
+
+```
+NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newArray count])];
+[oldArray insertObjects:newArray atIndexes:indexes];
+```
+#### 参考文档
+[NSMutableArray-Add array at start](https://stackoverflow.com/questions/22492706/nsmutablearray-add-array-at-start)
 
