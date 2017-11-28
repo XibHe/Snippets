@@ -264,3 +264,35 @@ NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newA
 #### 参考文档
 [NSMutableArray-Add array at start](https://stackoverflow.com/questions/22492706/nsmutablearray-add-array-at-start)
 
+**2017-11-28**
+### iOS开发之夏令时,NSDateFormatter格式化失败
+把1988-04-10类似的时间字符串使用NSDateFormatter转化成时间戳或者NSDate
+测试发现iOS格式化某些特殊时间字符串到NSDate的时候会后会返回空值,比如 1988-04-10,1989-04-16,1989-04-16 12:12等时间。
+
+```objectivec
+
+  // 方案一:
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    formatter.lenient = YES;
+    [formatter setLocale:[NSLocale currentLocale]];
+    NSDate *date = [formatter dateFromString:@"1988-04-10"];
+    CLog(@"date = %@",date);
+    date = 1988-04-09 16:00:00 +0000
+ 
+   方案二: 
+    //设置转换后的目标日期时区
+    NSTimeZone *toTimeZone = [NSTimeZone localTimeZone];
+    //转换后源日期与世界标准时间的偏移量
+    NSInteger toGMTOffset = [toTimeZone secondsFromGMTForDate:[NSDate date]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:toGMTOffset]];
+    NSDate *date0 = [dateFormatter dateFromString:@"1988-04-10"];
+    NSLog(@"timeZoneForSecondsFromGMT:%@", date0);
+    
+    //timeZoneForSecondsFromGMT:Sun Apr 10 01:00:00 1988
+```
+#### 参考资料 
+[iOS开发之夏令时,NSDateFormatter格式化失败](http://www.skyfox.org/ios-formatter-daylight-saving-time.html)
+[NSDate中夏令时的坑](http://blog.csdn.net/hanhailong18/article/details/78300257)
