@@ -296,3 +296,11 @@ NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newA
 #### 参考资料 
 [iOS开发之夏令时,NSDateFormatter格式化失败](http://www.skyfox.org/ios-formatter-daylight-saving-time.html)
 [NSDate中夏令时的坑](http://blog.csdn.net/hanhailong18/article/details/78300257)
+
+**2017-12-20**
+
+### NSArray的方法reverseObjectEnumerator
+
+按照索引号从大到小访问数组的元素，而不是从小到大访问数组的元素。
+
+ 
