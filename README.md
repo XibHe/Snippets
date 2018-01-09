@@ -303,4 +303,15 @@ NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newA
 
 按照索引号从大到小访问数组的元素，而不是从小到大访问数组的元素。
 
- 
+**2018-01-09**
+
+### 文字加投影
+
+```objectivec
+    UIButton *startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [startBtn setTitle:@"我要开通" forState:UIControlStateNormal];
+    startBtn.titleLabel.shadowOffset = CGSizeMake(0, 2);
+    [startBtn setTitleShadowColor:[GlobalMethod hexStringToColor:@"#29a9cc"] forState:UIControlStateNormal];
+
+```
+
