@@ -315,3 +315,18 @@ NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newA
 
 ```
 
+**2018-01-21**
+### iOS 11.1 使用MJRefresh上拉加载更多时，多次调用上拉加载更多的方法
+
+> iOS11 之后 selfSizzing 默认打开导致
+
+// 添加以下代码
+
+``` objectivec
+self.tableView.estimatedRowHeight =0;
+self.tableView.estimatedSectionHeaderHeight =0;
+self.tableView.estimatedSectionFooterHeight =0;
+```
+
+参考: [MJRefresh Issues #1071](https://github.com/CoderMJLee/MJRefresh/issues/1071
+) 
