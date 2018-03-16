@@ -2,14 +2,14 @@
 记录一些奇妙的代码片段
 
 ### 数组求和
-```
+```objectivec
 NSMutableArray *tempTotalPriceArray = [NSMutableArray array];
 float tempAllPrices = [[_tempTotalPriceArray valueForKeyPath:@"@sum.floatValue"] floatValue];
 ```
 ### NSCharacterSet
 根据NSCharacterSet匹配到的字符，分割字符串
 
-```
+```objectivec
     if ([_absoluteUrl rangeOfString:@"appLink/showBusyInfo?"].location != NSNotFound) {
         NSArray *absoluteArray = [_absoluteUrl componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"?&"]];
         for (NSInteger i = 0; i < [absoluteArray count]; i++) {
@@ -24,7 +24,7 @@ float tempAllPrices = [[_tempTotalPriceArray valueForKeyPath:@"@sum.floatValue"]
 ### ceil
 绘制角标提示视图时，在角标右侧偶尔会出现一条黑线。且有时在iPhone5s及以下机型不会出现, 只在iPhone6以上出现。这是因为计算出得size可能的值会10.3113325…… 这样的数, 而像素值显示的时候不可能出现显示半个像素的情况, 那么不足一个像素的值就会被忽略掉, 在分辨率较低的机型上不会出现, 而分辨率较高的则不会忽略, 就出现了黑线，于是采用ceil函数向上取整。
 
-```
+```objectivec
     CGFloat x = ceilf(percentX * tabFrame.size.width);
     CGFloat y = ceilf(0.1 * tabFrame.size.height);
 ```
@@ -33,7 +33,7 @@ float tempAllPrices = [[_tempTotalPriceArray valueForKeyPath:@"@sum.floatValue"]
 
 如标题所说，在自定义UITabBarController后，需求需要根据不同的情况，切换不同的UIViewController。但是，在初始化UITabBarController时，已经将需要切换的5个UIViewController，addChildViewController到了自定义UITabBarController中。这是就需要使用，
 
-```
+```objectivec
 [self transitionFromViewController:oldController toViewController:newController duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve
 animations:^{
    // no further animations required
@@ -49,7 +49,7 @@ animations:^{
 
 ### 计算UILabel的行数
 
-```
+```objectivec
 NSInteger _lineCount =  [self labelLineCount:addressWidth];
 - (NSInteger)labelLineCount:(CGFloat)width
 {
@@ -66,11 +66,11 @@ NSInteger _lineCount =  [self labelLineCount:addressWidth];
 ### 使用boundingRectWithSize计算内容高度
 iOS7以前我们对UILabel进行根据内容自适应大小的时候会使用方法sizeWithFont:constrainedToSize:lineBreakMode，但是这个方法在iOS7之后就被Deprecated了。对此，iOS7提供了一个新的方法来替代它，就是NSString的成员方法：
 
-```
+```objectivec
 - (CGRect)boundingRectWithSize:(CGSize)size options:(NSStringDrawingOptions)options attributes:(NSDictionary *)attributes context:(NSStringDrawingContext *)context；
 ```
 
-```
+```objectivec
 CGSize infoSize = CGSizeMake(tableView.frame.size.width, 1000);
 CGSize boundingRectWithSize = [_leftPrice.text boundingRectWithSize: infoSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:@{NSFontAttributeName:kFont(11)} context:nil].size;
 CLog(@"boundingRectWithSize = %@",NSStringFromCGSize(boundingRectWithSize));
@@ -82,7 +82,7 @@ CLog(@"boundingRectWithSize = %@",NSStringFromCGSize(boundingRectWithSize));
 
 ### 使用CAGradientLayer实现颜色渐变
 
-```
+```objectivec
 // 促销标签
 UILabel *salesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth * 26 / 375 / 2)];
 salesLabel.text = [SalesTagsObject salesTagsText:leftModel.tags];
@@ -106,7 +106,7 @@ gradientLayer.frame = CGRectMake(0, 0, screenWidth * 60 / 375 / 2, screenWidth *
 ### iOS通过js获取webview源代码
 获取所有源代码：
 
-```
+```objectivec
 NSString *JsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";    
 NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
 NSLog(@"%@",HTMLSource);继承UITableViewController,更改tableview样式
@@ -114,7 +114,7 @@ NSLog(@"%@",HTMLSource);继承UITableViewController,更改tableview样式
 
 获取页面的代码body的内容：
 
-```
+```objectivec
 NSString *JsToGetHTMLSource = @"document.body.innerHTML"; 
 NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
 NSLog(@"pagesource:%@", pageSource);
@@ -122,7 +122,7 @@ NSLog(@"pagesource:%@", pageSource);
 
 ### 继承UITableViewController,更改tableview样式
 
-```
+```objectivec
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     return [super initWithStyle:UITableViewStylePlain];
 }
@@ -132,7 +132,7 @@ NSLog(@"pagesource:%@", pageSource);
 
 实现方法
 
-```
+```objectivec
 - (UIViewController *)topViewController {
     UIViewController *resultVC;
     resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
@@ -155,13 +155,13 @@ NSLog(@"pagesource:%@", pageSource);
 ```
 使用方法
 
-```
+```objectivec
 UIViewController *topmostVC = [self topViewController];
 ```
 
 ### 修改系统相册返回按钮颜色
 
-```
+```objectivec
  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
  [picker.navigationBar setTintColor:[UIColor orangeColor]];
 ```
@@ -178,7 +178,7 @@ UIViewController *topmostVC = [self topViewController];
 
 例如，如果想检测 myObject是不是UIImageView，用如下代码：
 
-```
+```objectivec
 [myObject isKindOfClass:[UIImageView class]];
 ```
 
@@ -186,7 +186,7 @@ UIViewController *topmostVC = [self topViewController];
 
 在viewDidLoad方法中添加该行代码:
 
-```
+```objectivec
 [self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
 ```
 这行代码告诉collectionView手势识别需要等到导航栏侧滑返回手势失败，才能继续，强制侧滑手势优先级高于collectionView上的其他手势。
@@ -198,7 +198,7 @@ UIViewController *topmostVC = [self topViewController];
 
 运行项目并开启debugger,在调用动画的方法上添加断点，然后在控制台中输入如下命令:
 
-```
+```objectivec
 po [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] layer] setSpeed:.1f]
 ```
 #### 参考文档
@@ -207,7 +207,7 @@ po [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] la
 
 ### 设置UITableView分割线
 
-```
+```objectivec
 // 分割线颜色
 [_listTableView setSeparatorColor:[UIColor colorWithHexString:historySeparatorColor]];
 // 分割线位置
@@ -221,7 +221,7 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 需要重写的两个函数:
 
-```
+```objectivec
 @implementation CustomTextField
 // 返回placeholderLabel的bounds，改变返回值，是调整placeholderLabel的位置
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
@@ -241,7 +241,7 @@ self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 ### UITextField的UIControlEventEditingChanged事件执行两次的问题
 
-```
+```objectivec
 [searchText addTarget:self action:@selector(textContentChanged:) forControlEvents:UIControlEventEditingChanged];
 
 -(void)textContentChanged:(UITextField*)textFiled
@@ -257,7 +257,7 @@ NSLog( @"text changed222: %@", textFiled.text);
 
 ### NSMutableArray-Add array at start
 
-```
+```objectivec
 NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newArray count])];
 [oldArray insertObjects:newArray atIndexes:indexes];
 ```
@@ -330,3 +330,22 @@ self.tableView.estimatedSectionFooterHeight =0;
 
 参考: [MJRefresh Issues #1071](https://github.com/CoderMJLee/MJRefresh/issues/1071
 ) 
+
+**2018-03-16**
+### 小数向上，向下取整
+小数向上取整，指小数部分直接进1， x=3.14，ceilf(x)=4
+
+```objectivec
+NSLog(@"%d",  (int)ceil(10 / 3.0));  //结果是4
+```
+
+小数向下取整，指直接去掉小数部分 x=3.14，floor(x)=3
+
+```objectivec
+NSLog(@"%d", (int) ceil(10 / 3));  //结果是3
+```
+
+**ceil(x)** 返回不小于x的最小整数值，然后转换为double型。
+
+
+
