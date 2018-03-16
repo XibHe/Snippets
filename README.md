@@ -347,5 +347,43 @@ NSLog(@"%d", (int) ceil(10 / 3));  //结果是3
 
 **ceil(x)** 返回不小于x的最小整数值，然后转换为double型。
 
+### Layer的两个属性，positon 和 anchorPoint(锚点)
+
+```objectivec
+@property CGPoint position;
+```
+
+> 用来设置CALayer在父层中的位置，以父层的左上角为原点(0, 0)
+
+```objectivec
+@property CGPoint anchorPoint;
+```
+
+> 称为“定位点”、“锚点”
+决定着CALayer身上的哪个点会在position属性所指的位置，以自己的左上角为原点(0, 0)，它的x、y取值范围都是0~1，默认值为（0.5, 0.5）
+
+示例，
+
+![](https://upload-images.jianshu.io/upload_images/1574564-73850a05ad25828c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/611)
+
+* 假设紫色图层的position是（50，50）
+* 紫色图层的anchorPoint(锚点)位置是(0.5,0.5)
+* 图一是原始图 
+* 图二是即将移动的图
+* 图三是移动完成的图
+
+> 紫色图层自身的 **anchorPoint(锚点)** 必须和自身的 **position** 重合
+
+参考: [Layer两个属性position和anchorPoint](https://www.jianshu.com/p/7703e6fc6191) 
+
+
+
+
+
+
+
+
+
+
 
 
