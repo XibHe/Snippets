@@ -376,8 +376,37 @@ NSLog(@"%d", (int) ceil(10 / 3));  //结果是3
 
 参考: [Layer两个属性position和anchorPoint](https://www.jianshu.com/p/7703e6fc6191) 
 
+**2018-03-18**
+### 浮点数向上取整及其精确计算
 
+这里的需求是计算手续费时，保留小数点后两位。并且当最后一位小数大于 **0** 时，要自动向前进一位。例如，**0.112** 最后一位小数是 **2**，向前自动进一位是 **0.12**。
 
+这里最初是手写一个进位的算法，截取字符串去判断，不仅计算麻烦，影响效率，而且存在误差。与其一直去缝缝补补，还不如用系统提供给的 **API**。
+
+最后，代码如下，
+
+```objectivec
+
+NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                               decimalNumberHandlerWithRoundingMode:NSRoundUp
+                                               scale:2
+                                               raiseOnExactness:NO
+                                               raiseOnOverflow:NO
+                                               raiseOnUnderflow:NO
+                                               raiseOnDivideByZero:YES];
+            
+NSDecimalNumber *a = [NSDecimalNumber decimalNumberWithString:_currentTF.text];
+NSDecimalNumber *b = [NSDecimalNumber decimalNumberWithString:_billCharge];
+NSDecimalNumber *multiply = [a decimalNumberByMultiplyingBy:b withBehavior:roundUp];
+float billCharge = [multiply floatValue];
+            
+// 手续费最低为 0.10
+if (billCharge <= 0.10) {
+   billCharge = 0.10;
+}
+```
+
+参考: [iOS 浮点数的精确计算和四舍五入问题](https://www.jianshu.com/p/946c4c4aff33) 
 
 
 
