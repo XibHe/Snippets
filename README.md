@@ -315,3 +315,44 @@ NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[newA
 
 ```
 
+**2018-04-01**
+
+### NSMutableAttributedString 小例
+
+```objectivec
+// 水果（100g） 前者16号字体，括号内后者14号字体，颜色为灰色。
+_nameLabel.text = [NSString stringWithFormat:@"%@(%@)",prescriptionPreviewCellModel.nameStr,_prescriptionPreviewCellModel.model.usage];
+NSDictionary *dic = @{NSKernAttributeName:@0.f};
+NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:_nameLabel.text attributes:dic];
+[attributedString addAttribute:NSForegroundColorAttributeName value:color_font_hui range:NSMakeRange(prescriptionPreviewCellModel.nameStr.length, _prescriptionPreviewCellModel.model.usage.length + 2)];
+[attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0] range:NSMakeRange(prescriptionPreviewCellModel.nameStr.length, _prescriptionPreviewCellModel.model.usage.length + 2)];
+[_nameLabel setAttributedText:attributedString];
+_nameLabel sizeToFit];
+```
+
+### 画虚线
+
+```objectivec
+// 此处基于，UILabel画虚线。
+-(void)drawDottedLine
+{
+    CAShapeLayer *dotteShapeLayer = [CAShapeLayer layer];
+    CGMutablePathRef dotteShapePath =  CGPathCreateMutable();
+    //设置虚线颜色为blackColor
+    [dotteShapeLayer setStrokeColor:[[UIColor hexStringToColor:@"#d9d9d9"] CGColor]];
+    //设置虚线宽度
+    dotteShapeLayer.lineWidth = 1.0f ;
+    //4=线的宽度 2=每条线的间距
+    NSArray *dotteShapeArr = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:4],[NSNumber numberWithInt:2], nil];
+    [dotteShapeLayer setLineDashPattern:dotteShapeArr];
+    // 控制虚线的方向和高度
+    CGPathMoveToPoint(dotteShapePath, NULL, 0 ,0);
+    CGPathAddLineToPoint(dotteShapePath, NULL, 0, 88 / 2);
+    [dotteShapeLayer setPath:dotteShapePath];
+    CGPathRelease(dotteShapePath);
+    //把绘制好的虚线添加上来
+    [self.lineView.layer addSublayer:dotteShapeLayer];
+}
+```
+
+
