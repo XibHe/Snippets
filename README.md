@@ -447,5 +447,31 @@ _nameLabel sizeToFit];
     [self.lineView.layer addSublayer:dotteShapeLayer];
 }
 ```
+**2018-05-03**
+
+### [__NSArrayM objectForKeyedSubscript:]: unrecognized selector sent to instance - source code and screenshot attached
+
+```objectivec
+id jso = [NSJSONSerialization JSONObjectWithData:data
+    options:NSJSONReadingMutableContainers error:nil];
+if (jso == nil) {
+    // Error.  You should probably have passed an NSError ** as the error
+    // argument so you could log it.
+} else if ([jso isKindOfClass:[NSArray class]]) {
+    NSArray *array = jso;
+    // process array elements
+} else if ([jso isKindOfClass:[NSDictionary class]]) {
+    NSDictionary *dict = jso;
+    // process dictionary elements
+} else {
+    // Shouldn't happen unless you use the NSJSONReadingAllowFragments flag.
+}
+```
+
+参考: [objectForKeyedSubscript: unrecognized selector sent to instance](https://stackoverflow.com/questions/21268539/nsarraym-objectforkeyedsubscript-unrecognized-selector-sent-to-instance) 
+
+
+
+
 
 
