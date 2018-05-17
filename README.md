@@ -470,7 +470,29 @@ if (jso == nil) {
 
 参考: [objectForKeyedSubscript: unrecognized selector sent to instance](https://stackoverflow.com/questions/21268539/nsarraym-objectforkeyedsubscript-unrecognized-selector-sent-to-instance) 
 
+**2018-05-17**
 
+### NSDate 8小时问题
+
+```
+//1.获取当前时间 零时区的时间
+    NSDate *date = [NSDate date];
+    NSLog(@"当前零时区时间 %@", date);
+    
+//2.获得本地时间 东八区 晚八个小时 以秒计时
+    NSDate *date1 = [NSDate dateWithTimeIntervalSinceNow:8 * 60 * 60];
+    NSLog(@"今天此时的时间 %@",date1);
+```
+
+[NSDate date]获取的数据为什么少了8小时？
+是因为他获取的是零时区的时间，显示的是格林尼治的时间: 年-月-日 时：分：秒：+时区，我们在东八区，所以会有8小时的问题，系统是没问题的。
+
+
+### iOS 状态栏的隐藏
+
+Info.plist中设置View controller-based status bar appearance 为 **NO**
+
+注意：View controller-based status bar appearance-NO一但添加，通过重写父类方法来控制状态栏的地方都会失效，反过来也是。
 
 
 
