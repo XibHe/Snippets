@@ -474,7 +474,7 @@ if (jso == nil) {
 
 ### NSDate 8小时问题
 
-```
+```objectivec
 //1.获取当前时间 零时区的时间
     NSDate *date = [NSDate date];
     NSLog(@"当前零时区时间 %@", date);
@@ -494,6 +494,38 @@ Info.plist中设置View controller-based status bar appearance 为 **NO**
 
 注意：View controller-based status bar appearance-NO一但添加，通过重写父类方法来控制状态栏的地方都会失效，反过来也是。
 
+### 设置任意角为圆角
 
+```objectivec
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(120, 400, 80, 80)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview: view];
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect: view.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = maskPath.CGPath;
+    view.layer.mask = maskLayer;
+```
 
+### array不为空
 
+```objectivec
+if (array != nil && ![array isKindOfClass:[NSNull class]] && array.count != 0){
+　　//执行array不为空时的操作
+}
+```
+
+### layoutSubviews
+
+layoutSubviews在以下情况下会被调用：
+
+1. nit初始化不会触发layoutSubviews
+但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发
+2. addSubview会触发layoutSubviews
+3. 设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化
+4. 滚动一个UIScrollView会触发layoutSubviews
+5. 旋转Screen会触发父UIView上的layoutSubviews事件
+6. 改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件
+
+[layoutSubviews总结](https://www.jianshu.com/p/a2acc4c7dc4b)
