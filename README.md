@@ -529,3 +529,30 @@ layoutSubviews在以下情况下会被调用：
 6. 改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件
 
 [layoutSubviews总结](https://www.jianshu.com/p/a2acc4c7dc4b)
+
+### iOS 11 下的 UIImagePickerController 编辑图片时，左下角取消按键难点击的问题
+
+让你的类实现 **UINavigationControllerDelegate** 接口，然后实现这个方法:
+
+```objectivec
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([UIDevice currentDevice].systemVersion.floatValue < 11) {
+        return;
+    }
+    if ([viewController isKindOfClass:NSClassFromString(@"PUPhotoPickerHostViewController")]) {
+        [viewController.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.frame.size.width < 42) {
+                [viewController.view sendSubviewToBack:obj];
+                *stop = YES;
+            }
+        }];
+    }
+}
+```
+
+[fix iOS 11 下的 UIImagePickerController 编辑图片时的 左下角取消按键难点击的问题 #1](https://github.com/tangbl93/tangbl93.github.io/issues/1)
+
+[iOS 11 UIImagePickerController after selection cancel button bug](https://stackoverflow.com/questions/46762200/ios-11-uiimagepickercontroller-after-selection-cancel-button-bug)
+
+
+
