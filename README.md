@@ -530,6 +530,8 @@ layoutSubviews在以下情况下会被调用：
 
 [layoutSubviews总结](https://www.jianshu.com/p/a2acc4c7dc4b)
 
+**2018-06-20**
+
 ### iOS 11 下的 UIImagePickerController 编辑图片时，左下角取消按键难点击的问题
 
 让你的类实现 **UINavigationControllerDelegate** 接口，然后实现这个方法:
@@ -554,5 +556,25 @@ layoutSubviews在以下情况下会被调用：
 
 [iOS 11 UIImagePickerController after selection cancel button bug](https://stackoverflow.com/questions/46762200/ios-11-uiimagepickercontroller-after-selection-cancel-button-bug)
 
+**2018-07-10**
+
+###iOS状态栏的显示与隐藏
+
+1. View controller-based status bar appearance控制App状态栏显隐接受全局配置（NO）或者各控制器各自配置（YES）。
+2. [[UIApplicationsharedApplication]setStatusBarHidden:hidden]，必须在View controller-based status bar appearance == NO条件下才能生效。相应的prefersStatusBarHidden为局部配置项，控制对应控制器状态栏显隐，必须在View controller-based status bar appearance == YES才生效。
+3. 设置Status bar is initially hidden -> YES可以隐藏启动页展示过程的状态栏。
+
+[iOS状态栏的显示与隐藏](https://www.jianshu.com/p/4b2aa09bee06)
+
+###iOS 图片压缩限制大小最优解
+
+导入 **UIImage+WLCompress**
+
+```objectivec
+// 将图片压缩为 20k 
+NSData *imageData = [snapshotImage compressWithLengthLimit:20.0f * 1024.0f];
+```
+
+[iOS 图片压缩限制大小最优解](https://www.jianshu.com/p/99c3e6a6c033)
 
 
