@@ -577,4 +577,26 @@ NSData *imageData = [snapshotImage compressWithLengthLimit:20.0f * 1024.0f];
 
 [iOS 图片压缩限制大小最优解](https://www.jianshu.com/p/99c3e6a6c033)
 
+**2018-07-11**
+
+### WKWebView加载h5调用原生相册相机问题
+
+解决方法是改变了h5控制器的打开方式
+
+1. 将h5控制器变成rootViewController
+2. 使用Push的方法打开h5控制器
+
+[WKWebView加载h5调用原生相册相机问题](http://irenachou.github.io/2018/01/16/18-01-16-wkwebview-01/)
+
+###h5调用相机时页面dismiss到根控制器的问题
+
+```objectivec
+- (void) dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
+    if ( self.presentedViewController) {
+        [super dismissViewControllerAnimated:flag completion:completion];
+    }
+}
+```
+
+
 
