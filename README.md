@@ -598,5 +598,22 @@ NSData *imageData = [snapshotImage compressWithLengthLimit:20.0f * 1024.0f];
 }
 ```
 
+**2018-09-29**
+
+###计算价格丢失精确度的问题
+
+计算价格时保留小数点后4位，并向上取整后，精确度错误的问题。需要注意以下几点：
+
+1. 计算时几个变量相互加减乘除的单位是否统一；
+2. 注意 float 和 double 的区分；
+3. 建议使用 CGFloat (CGFloat 只是对 float 或 double 的 typedef 定义，在64位机器上，CGFloat 定义为 double 类型，在32位机器上为 float.)
+4. 在使用 ceilf 函数进行向上取整时，在一些情况下，会由于小数点后没有足够的小数进位而丢失精度。这时候可以先乘以 100 再除以 100 确保有足够的位数进位。
+
+例如，
+
+```objectivec
+CGFloat shishou = 10.2;
+[_shishouPrice setTitle:[NSString tranForPriceWith:[NSString stringWithFormat:@"%.2f",ceilf(shizhou * 100)/100]] forState:UIControlStateNormal];
+```
 
 
