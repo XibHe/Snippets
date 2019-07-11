@@ -616,4 +616,20 @@ CGFloat shishou = 10.2;
 [_shishouPrice setTitle:[NSString tranForPriceWith:[NSString stringWithFormat:@"%.2f",ceilf(shizhou * 100)/100]] forState:UIControlStateNormal];
 ```
 
+**2019-07-11**
 
+### 增加按钮点击的热区
+
+```objectivec
+[_closeButton setMcTouchAreaInsets:UIEdgeInsetsMake(20.f, 20.f, 20.f, 20.f)];
+```
+
+```objectivec
+#import "UIButton+MCExtension.h"
+
+- (void)setMcTouchAreaInsets:(UIEdgeInsets)mcTouchAreaInsets
+{
+    NSValue *value = [NSValue valueWithUIEdgeInsets:mcTouchAreaInsets];
+    objc_setAssociatedObject(self, @selector(mcTouchAreaInsets), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+```
