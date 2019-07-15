@@ -633,3 +633,21 @@ CGFloat shishou = 10.2;
     objc_setAssociatedObject(self, @selector(mcTouchAreaInsets), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 ```
+
+**2019-07-12**
+
+### 百度定位 V1.6.0 不弹出系统定位授权弹窗
+
+```objectivec
+/**
+ *  @brief 为了适配app store关于新的后台定位的审核机制（app store要求如果开发者只配置了使用期间定位，则代码中不能出现申请后台定位的逻辑），当开发者在plist配置NSLocationAlwaysUsageDescription或者NSLocationAlwaysAndWhenInUseUsageDescription时，需要在该delegate中调用后台定位api：[locationManager requestAlwaysAuthorization]。开发者如果只配置了NSLocationWhenInUseUsageDescription，且只有使用期间的定位需求，则无需在delegate中实现逻辑。
+ *  @param manager 定位 BMKLocationManager 类。
+ *  @param locationManager 系统 CLLocationManager 类 。
+ *  @since 1.6.0
+ */
+- (void)BMKLocationManager:(BMKLocationManager *)manager doRequestAlwaysAuthorization:(CLLocationManager *)locationManager {
+    [locationManager requestAlwaysAuthorization];
+}
+``` 
+
+在调取定位的类中增加代理方法 **BMKLocationManagerDelegate**
