@@ -651,3 +651,28 @@ CGFloat shishou = 10.2;
 ``` 
 
 在调取定位的类中增加代理方法 **BMKLocationManagerDelegate**
+
+**2019-07-31**
+
+### cell 高度的自适应
+
+cell 高度的自适应，在 cell 中设置当前 cell 的最大高度（因为是自适应的，所以高度一般很大。eg. 1000）传入 cell 的特定宽度。因为项目中用到了 Masonry，因此需要在获取高度的方法里主动调用:
+
+```objectivec
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+```
+
+以获取试图最新的高度。例如，在 cell 中通过如下方法设置：
+
+```objectivec
+- (CGFloat)computeCellHeightWithWeight:(CGFloat)cellWeightssuModel:(MCShopSSUModel *)ssuModel {
+    self.frame = CGRectMake(0, 0, cellWeight, 1000);
+    [self setSsuModel:ssuModel];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
+    return CGRectGetMaxY(self.popLabel.frame) + 15;
+    
+}
+```
