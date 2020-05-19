@@ -676,3 +676,19 @@ cell 高度的自适应，在 cell 中设置当前 cell 的最大高度（因为
     
 }
 ```
+
+**2020-05-19**
+
+### 渐变色
+
+```Swift
+let gradientLayer = CAGradientLayer()
+gradientLayer.frame = CGRect(x: 0, y: 0, width: 20, height: 60)
+// 开始位置
+gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+// 结束位置
+gradientLayer.endPoint = CGPoint(x: 0, y: 1.0)
+// 颜色区间
+gradientLayer.colors = [UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.3).cgColor,UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor]
+view.layer.addSublayer(gradientLayer)
+```
